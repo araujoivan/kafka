@@ -32,7 +32,8 @@ public class DemoApplication extends JFrame {
     public static void main(String[] args) {
 
         ConfigurableApplicationContext context = new SpringApplicationBuilder(DemoApplication.class)
-                .headless(false).run(args);
+                .headless(false)
+                .run(args);
 
         EventQueue.invokeLater(() -> {
             DemoApplication ex = context.getBean(DemoApplication.class);
@@ -42,32 +43,27 @@ public class DemoApplication extends JFrame {
 
     private void initUI() {
 
-        JFrame f = new JFrame("Kafka Producer Example");
+        JFrame frame = new JFrame("Kafka Producer");
 
         JButton submitButton = new JButton("Enviar");
         submitButton.setBounds(100, 100, 140, 40);
 
         JLabel label = new JLabel();
-        label.setText("Digite o texto :");
+        label.setText("Digite a mensagem :");
         label.setBounds(10, 10, 100, 100);
-
-        JLabel label1 = new JLabel();
-        label1.setBounds(10, 110, 200, 100);
 
         JTextField textfield = new JTextField();
         textfield.setBounds(110, 50, 130, 30);
 
-        f.add(label1);
-        f.add(textfield);
-        f.add(label);
-        f.add(submitButton);
-        f.setSize(300, 300);
-        f.setLayout(null);
-        f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(textfield);
+        frame.add(label);
+        frame.add(submitButton);
+        frame.setSize(350, 200);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         submitButton.addActionListener((ActionEvent arg) -> {
-            label1.setText("Mensagem enviada!");
             serviceMessage.enviaMensagem(textfield.getText());
             textfield.setText("");
         });
