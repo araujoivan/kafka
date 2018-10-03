@@ -5,7 +5,6 @@
  */
 package com.example.kafka.consumer.service;
 
-import com.jabrains.kafkamodel.model.User;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumerService {
     
-    @KafkaListener(topics = "userBio", containerFactory = "kafkaListenerContainerFactory", groupId = "group_json")
-    public void consumeJson(User user) {
+    @KafkaListener(topics = "geral", containerFactory = "kafkaListenerContainerFactory", groupId = "group_json")
+    public void consumeJson(Stri user) {
         System.out.println(user);
     }
 }
