@@ -1,7 +1,6 @@
 package com.example.kafka.producer;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
 
 import com.example.kafka.producer.controler.KafkaServiceMessage;
 
@@ -24,7 +23,9 @@ public class DemoApplication extends JFrame {
 
     @Autowired
     private KafkaServiceMessage serviceMessage;
-    
+
+    private final JLabel messageSentLabel = new JLabel();
+
     public DemoApplication() {
         initUI();
     }
@@ -43,29 +44,40 @@ public class DemoApplication extends JFrame {
 
     private void initUI() {
 
-        JFrame frame = new JFrame("Kafka Producer");
+        setTitle("Kafka Producer Example");
 
-        JButton submitButton = new JButton("Enviar");
-        submitButton.setBounds(100, 100, 140, 40);
+        messageSentLabel.setText("Digite uma menssagem e clique em Enviar:");
+        messageSentLabel.setBounds(10, 10, 270, 100);
 
-        JLabel label = new JLabel();
-        label.setText("Digite a mensagem :");
-        label.setBounds(10, 10, 100, 100);
+        JLabel messageLabel = new JLabel();
+        messageLabel.setText("Mensagem:");
+        messageLabel.setBounds(10, 40, 90, 100);
 
-        JTextField textfield = new JTextField();
-        textfield.setBounds(110, 50, 130, 30);
+        JTextField messageTextField = new JTextField();
+        messageTextField.setBounds(105, 90, 270, 30);
 
-        frame.add(textfield);
-        frame.add(label);
-        frame.add(submitButton);
-        frame.setSize(350, 200);
-        frame.setLayout(null);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton sendMessageButton = new JButton("Enviar");
+        sendMessageButton.setBounds(105, 130, 140, 40);
 
-        submitButton.addActionListener((ActionEvent arg) -> {
-            serviceMessage.enviaMensagem(textfield.getText());
-            textfield.setText("");
+        add(messageSentLabel);
+        add(messageLabel);
+        add(messageTextField);
+        add(sendMessageButton);
+        setSize(400, 220);
+        setLayout(null);
+        setVisible(Boolean.TRUE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        sendMessageButton.addActionListener((a) -> {
+
+            String message = messageTextField.getText();
+
+            if (message != null && !message.isEmpty()) {
+                serviceMessage.enviaMensagem(messageTextField.getText());
+                messageSentLabel.setText("Mensagem ".concat(message).concat(" enviada!"));
+            } else {
+                messageSentLabel.setText("Digite uma menssagem e clique em Enviar:");
+            }
         });
     }
 }

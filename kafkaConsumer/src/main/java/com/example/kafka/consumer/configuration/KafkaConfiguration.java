@@ -30,13 +30,13 @@ public class KafkaConfiguration {
 
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 
-        factory.setConsumerFactory(userConsumerFactory());
+        factory.setConsumerFactory(consumerFactory());
 
         return factory;
     }
 
     @Bean
-    public ConsumerFactory<String, String> userConsumerFactory() {
+    public ConsumerFactory<String, String> consumerFactory() {
 
         Map<String, Object> config = new HashMap();
 

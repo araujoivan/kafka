@@ -19,6 +19,8 @@ import javax.swing.Timer;
 @SpringBootApplication
 public class KafkaConsumerApplication extends JFrame {
 
+    private static final String TOPIC = "geral";
+
     public static void main(String[] args) {
 
         ConfigurableApplicationContext context = new SpringApplicationBuilder(KafkaConsumerApplication.class)
@@ -30,7 +32,7 @@ public class KafkaConsumerApplication extends JFrame {
         });
     }
 
-    @KafkaListener(topics = "geral", containerFactory = "kafkaListenerContainerFactory", groupId = "group_json")
+    @KafkaListener(topics = TOPIC, containerFactory = "kafkaListenerContainerFactory", groupId = "group_json")
     public void getMessage(String message) {
 
         JOptionPane pane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
